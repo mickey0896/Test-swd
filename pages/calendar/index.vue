@@ -56,6 +56,7 @@
         style="background-color:#c7f1cb;color:#000000;float:left"
         :active="active == 3"
         @click="active = 3"
+        to="management"
       >
         <i class="material-icons" >&nbsp;list</i>&nbsp;List&nbsp;
   </vs-button>
@@ -65,7 +66,6 @@
         style="background-color:#c7f1cb;color:#000000;float:left"
         :active="active == 3"
         @click="active = 3"
-        to="calendar"
       >
          <i class="material-icons" >&nbsp;event_note</i>&nbsp;Calendar&nbsp;
   </vs-button>
@@ -79,32 +79,25 @@
       >
         <i class="material-icons" >&nbsp;group</i>&nbsp;User&nbsp;
   </vs-button>
-        <p style="color:#0C090A;font-size:20px;">List Table</p>
+        <p style="color:#0C090A;font-size:20px;">Calendar Table</p>
 
 <v-card>
 <vs-table striped>
     <template #thead>
       <vs-tr>
-         <vs-th>
-          ID
-        </vs-th>
-       <vs-th style="padding-right:200px;">
-          Data
-        </vs-th>
+      
        <vs-th style="padding-right:200px;">
           Timestamp
         </vs-th>
-        <vs-th style="padding-right:200px;">
-          Data2
-        </vs-th>
+        
       </vs-tr>
     </template>
     <template #tbody>
       <vs-tr v-for="(tr, index) in users" :key="index" >
-        <vs-td>{{tr.id}}</vs-td>
-        <vs-td>{{tr.data}}</vs-td>
+       
+        
         <vs-td>{{tr.timestamp}}</vs-td>
-        <vs-td>{{tr.data2}}</vs-td>
+       
       </vs-tr>
     </template>
     </vs-table>
