@@ -1,70 +1,72 @@
 <template>
-  <v-row>
-    <v-col>
-      <v-sheet height="400">
-        <v-calendar
-          ref="calendar"
-          :now="today"
-          :value="today"
-          :events="events"
-          color="primary"
-          type="week"
-        ></v-calendar>
-      </v-sheet>
-    </v-col>
-  </v-row>
+  <div>
+    <v-sheet
+      tile
+      height="54"
+      class="d-flex"
+    >
+      <v-btn
+        icon
+        class="ma-2"
+        @click="$refs.calendar.prev()"
+      >
+        <v-icon>mdi-chevron-left</v-icon>
+      </v-btn>
+      <v-select
+        v-model="type"
+        :items="types"
+        dense
+        outlined
+        hide-details
+        class="ma-2"
+        label="type"
+      ></v-select>
+     
+      <v-select
+        v-model="weekday"
+        :items="weekdays"
+        dense
+        outlined
+        hide-details
+        label="weekdays"
+        class="ma-2"
+      ></v-select>
+      <v-spacer></v-spacer>
+      <v-btn
+        icon
+        class="ma-2"
+        @click="$refs.calendar.next()"
+      >
+        <v-icon>mdi-chevron-right</v-icon>
+      </v-btn>
+    </v-sheet>
+    <v-sheet height="600">
+      <v-calendar
+        ref="calendar"
+        v-model="value"
+        :weekdays="weekday"
+        :type="type"   
+      >
+      </v-calendar>
+    </v-sheet>
+  </div>
 </template>
 
 <script>
   export default {
-     layout: 'coreLayout',
-     auth: false,
     data: () => ({
-      today: '2019-01-08',
-      events: [
-        {
-       
-          start: '2019-01-07 09:00',
-          end: '2019-01-07 10:00',
-        },
-        {
-         
-          start: '2019-01-10',
-        },
-        {
-          
-          start: '2019-01-09 12:30',
-          end: '2019-01-09 15:30',
-        },
+      type: 'month',
+      types: ['month', 'week', 'day', '4day'],
+  
+      weekday: [0, 1, 2, 3, 4, 5, 6],
+      weekdays: [
+        { text: 'Sun - Sat', value: [0, 1, 2, 3, 4, 5, 6] },
+        { text: 'Mon - Sun', value: [1, 2, 3, 4, 5, 6, 0] },
+        { text: 'Mon - Fri', value: [1, 2, 3, 4, 5] },
+        { text: 'Mon, Wed, Fri', value: [1, 3, 5] },
       ],
+      value: '',
     }),
-    mounted () {
-      this.$refs.calendar.scrollToTime('08:00')
-    },
+
   }
 </script>
-
-<style scoped>
-.my-event {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  border-radius: 2px;
-  background-color: #1867c0;
-  color: #ffffff;
-  border: 1px solid #1867c0;
-  font-size: 12px;
-  padding: 3px;
-  cursor: pointer;
-  margin-bottom: 1px;
-  left: 4px;
-  margin-right: 8px;
-  position: relative;
-}
-
-.my-event.with-time {
-  position: absolute;
-  right: 4px;
-  margin-right: 0px;
-}
-</style>
